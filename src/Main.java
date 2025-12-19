@@ -1,5 +1,3 @@
-import java.nio.charset.StandardCharsets;
-
 public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
@@ -12,30 +10,10 @@ public class Main {
                 String input = args[1]; // text
                 String key = args[2]; // text
 
-                byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
-                String inputBits = "";
+                String inputBits = BinaryConverter.convertToBin(input);
+                String keyBits = BinaryConverter.convertToBin(key);
 
-                for (byte b : inputBytes) {
-                    inputBits += String.format("%8s", Integer.toBinaryString(b & 0xFF))
-                            .replace(' ', '0');
-                }
-
-                byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
-                String keyBits = "";
-
-                for (byte b : keyBytes) {
-                    keyBits += String.format("%8s", Integer.toBinaryString(b & 0xFF))
-                            .replace(' ', '0');
-                }
-
-                String result = "";
-                for (int i = 0; i < inputBits.length(); i++) {
-                    if (inputBits.charAt(i) == keyBits.charAt(i)) {
-                        result += "0";
-                    } else {
-                        result += "1";
-                    }
-                }
+                String result = XorUtil.xor(inputBits, keyBits);
 
                 System.out.println("in: " + inputBits);
                 System.out.println("key: " + keyBits);
@@ -45,35 +23,14 @@ public class Main {
                 String inputBits = args[1]; // binary
                 String key = args[2]; // text
 
-                byte[] keyBytes = key.getBytes(StandardCharsets.UTF_8);
-                String keyBits = "";
+                String keyBits = BinaryConverter.convertToBin(key);
+                String resultBits = XorUtil.xor(inputBits, keyBits);
 
-                for (byte b : keyBytes) {
-                    keyBits += String.format("%8s", Integer.toBinaryString(b & 0xFF))
-                            .replace(' ', '0');
-                }
-
-                String result = "";
-                for (int i = 0; i < inputBits.length(); i++) {
-                    if (inputBits.charAt(i) == keyBits.charAt(i)) {
-                        result += "0";
-                    } else {
-                        result += "1";
-                    }
-                }
-                
-                byte[] bytes = new byte[result.length() / 8];
-
-                for (int i = 0; i < bytes.length; i++) {
-                    bytes[i] = (byte) Integer.parseInt(
-                        result.substring(i * 8, i * 8 + 8), 2);
-                }
-
-                String text = new String(bytes, StandardCharsets.UTF_8);
+                String result = BinaryConverter.convertToText(resultBits);
 
                 System.out.println("in: " + inputBits);
                 System.out.println("key: " + keyBits);
-                System.out.println("out: " + text);
+                System.out.println("out: " + result);
             }
             case "-h" -> { // help
                 System.out.println("Available commands:");
