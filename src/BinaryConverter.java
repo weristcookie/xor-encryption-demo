@@ -2,15 +2,16 @@ import java.nio.charset.StandardCharsets;
 
 class BinaryConverter {
     public static String convertToBin(String input) {
-        byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
-        String result = "";
+        StringBuilder sb = new StringBuilder();
 
+        byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
+        
         for (byte b : inputBytes) {
-            result += String.format("%8s", Integer.toBinaryString(b & 0xFF))
-                    .replace(' ', '0');
+            sb.append(String.format("%8s", Integer.toBinaryString(b & 0xFF))
+                    .replace(' ', '0'));
         }
 
-        return result;
+        return sb.toString();
     }
 
     public static String convertToText(String input) {
