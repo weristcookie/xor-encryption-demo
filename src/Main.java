@@ -7,30 +7,28 @@ public class Main {
 
         switch (args[0]) {
             case "-e" -> { // encrypt
+                if (args.length != 3) {
+                    System.out.println("Invalid usage!");
+                    return;
+                }
+
                 String input = args[1]; // text
                 String key = args[2]; // text
 
-                String inputBits = BinaryConverter.convertToBin(input);
-                String keyBits = BinaryConverter.convertToBin(key);
-
-                String result = XorUtil.xor(inputBits, keyBits);
-
-                System.out.println("in: " + inputBits);
-                System.out.println("key: " + keyBits);
-                System.out.println("out: " + result);
+                String result = XorWrapper.encrypt(input, key);
+                System.out.println(result);
             }
             case "-d" -> { // decrypt
+                if (args.length != 3) {
+                    System.out.println("Invalid usage!");
+                    return;
+                }
+
                 String inputBits = args[1]; // binary
                 String key = args[2]; // text
 
-                String keyBits = BinaryConverter.convertToBin(key);
-                String resultBits = XorUtil.xor(inputBits, keyBits);
-
-                String result = BinaryConverter.convertToText(resultBits);
-
-                System.out.println("in: " + inputBits);
-                System.out.println("key: " + keyBits);
-                System.out.println("out: " + result);
+                String result = XorWrapper.decrypt(inputBits, key);
+                System.out.println(result);
             }
             case "-h" -> { // help
                 System.out.println("Available commands:");

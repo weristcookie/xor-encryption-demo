@@ -1,6 +1,6 @@
 import java.nio.charset.StandardCharsets;
 
-public class BinaryConverter {
+class BinaryConverter {
     public static String convertToBin(String input) {
         byte[] inputBytes = input.getBytes(StandardCharsets.UTF_8);
         String result = "";
