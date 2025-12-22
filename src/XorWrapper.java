@@ -5,8 +5,10 @@ class XorWrapper {
 
         if (verbose) {
             System.out.println("in:           " + inputBits);
-            System.out.println("normal key:   " + keyBits);
-            System.out.println("repeated key: " + repeatedKeyBits);
+            System.out.println("key:          " + keyBits);
+            if (inputBits.length() != keyBits.length()) {
+                System.out.println("repeated key: " + repeatedKeyBits);
+            }
         }
 
         return resultBits;
@@ -19,8 +21,10 @@ class XorWrapper {
 
         if (verbose) {
             System.out.println("in:           " + inputBits);
-            System.out.println("normal key:   " + keyBits);
-            System.out.println("repeated key: " + repeatedKeyBits);
+            System.out.println("key:          " + keyBits);
+            if (inputBits.length() != keyBits.length()) {
+                System.out.println("repeated key: " + repeatedKeyBits);
+            }
         }
 
         return resultBits;
@@ -34,7 +38,7 @@ class XorWrapper {
 
         int keyRepeat = inputLength / keyLength; // number of full key repeats
         int keyPart = inputLength % keyLength; // number of chars
-        
+
         for (int i = 0; i < keyRepeat; i++) {
             sb.append(keyBits);
         }

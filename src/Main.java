@@ -14,12 +14,8 @@ public class Main {
 
                 String input = args[1]; // text
                 String key = args[2]; // text
-
-                Boolean verbose = false;
-                
-                try {
-                    verbose = args[3].equals("-v");
-                } catch (Exception e) {}
+              
+                Boolean verbose = args.length > 3 && args[3].equals("-v");
                 
                 String inputBits = BinaryConverter.convertToBin(input);
                 String keyBits = BinaryConverter.convertToBin(key);
@@ -37,11 +33,7 @@ public class Main {
                 String inputBits = args[1]; // binary
                 String key = args[2]; // text
 
-                Boolean verbose = false;
-                
-                try {
-                    verbose = args[3].equals("-v");
-                } catch (Exception e) {}
+                Boolean verbose = args.length > 3 && args[3].equals("-v");
 
                 String keyBits = BinaryConverter.convertToBin(key);
                 String result = XorWrapper.decrypt(inputBits, keyBits, verbose);
