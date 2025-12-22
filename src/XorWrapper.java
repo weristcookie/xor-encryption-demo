@@ -1,10 +1,7 @@
 class XorWrapper {
-    public static String encrypt(String input, String key, Boolean verbose) { // text -> bits
-        String inputBits = BinaryConverter.convertToBin(input);
-        String keyBits = BinaryConverter.convertToBin(key);
-
+    public static String encrypt(String inputBits, String keyBits, Boolean verbose) { // bits -> bits
         String repeatedKeyBits = keyRepeater(inputBits, keyBits);
-        String result = XorUtil.xor(inputBits, repeatedKeyBits);
+        String resultBits = XorUtil.xor(inputBits, repeatedKeyBits);
 
         if (verbose) {
             System.out.println("in:           " + inputBits);
@@ -12,24 +9,21 @@ class XorWrapper {
             System.out.println("repeated key: " + repeatedKeyBits);
         }
 
-        return result;
+        return resultBits;
     }
 
-    public static String decrypt(String inputBits, String key, Boolean verbose) { // bits -> text
-        String keyBits = BinaryConverter.convertToBin(key);
+    public static String decrypt(String inputBits, String keyBits, Boolean verbose) { // bits -> bits
         String repeatedKeyBits = keyRepeater(inputBits, keyBits);
 
         String resultBits = XorUtil.xor(inputBits, repeatedKeyBits);
-        String result = BinaryConverter.convertToText(resultBits);
 
         if (verbose) {
             System.out.println("in:           " + inputBits);
             System.out.println("normal key:   " + keyBits);
             System.out.println("repeated key: " + repeatedKeyBits);
-            System.out.println("result bits:  " + resultBits);
         }
 
-        return result;
+        return resultBits;
     }
 
     private static String keyRepeater(String inputBits, String keyBits) {

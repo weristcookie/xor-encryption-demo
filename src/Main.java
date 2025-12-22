@@ -21,8 +21,11 @@ public class Main {
                     verbose = args[3].equals("-v");
                 } catch (Exception e) {}
                 
+                String inputBits = BinaryConverter.convertToBin(input);
+                String keyBits = BinaryConverter.convertToBin(key);
 
-                String result = XorWrapper.encrypt(input, key, verbose);
+                String result = XorWrapper.encrypt(inputBits, keyBits, verbose);
+
                 System.out.println("out:          " + result);
             }
             case "-d" -> { // decrypt
@@ -40,8 +43,11 @@ public class Main {
                     verbose = args[3].equals("-v");
                 } catch (Exception e) {}
 
-                String result = XorWrapper.decrypt(inputBits, key, verbose);
-                System.out.println("out:          " + result);
+                String keyBits = BinaryConverter.convertToBin(key);
+                String result = XorWrapper.decrypt(inputBits, keyBits, verbose);
+                String resultText = BinaryConverter.convertToText(result);
+
+                System.out.println("out:          " + resultText);
             }
             case "-h" -> { // help
                 System.out.println("Available commands:");
