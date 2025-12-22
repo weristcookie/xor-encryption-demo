@@ -7,7 +7,7 @@ public class Main {
 
         switch (args[0]) {
             case "-e" -> { // encrypt
-                if (args.length != 3) {
+                if (args.length < 3) {
                     System.out.println("Invalid usage!");
                     return;
                 }
@@ -15,11 +15,18 @@ public class Main {
                 String input = args[1]; // text
                 String key = args[2]; // text
 
-                String result = XorWrapper.encrypt(input, key);
-                System.out.println(result);
+                Boolean verbose = false;
+                
+                try {
+                    verbose = args[3].equals("-v");
+                } catch (Exception e) {}
+                
+
+                String result = XorWrapper.encrypt(input, key, verbose);
+                System.out.println("out:          " + result);
             }
             case "-d" -> { // decrypt
-                if (args.length != 3) {
+                if (args.length < 3) {
                     System.out.println("Invalid usage!");
                     return;
                 }
@@ -27,14 +34,21 @@ public class Main {
                 String inputBits = args[1]; // binary
                 String key = args[2]; // text
 
-                String result = XorWrapper.decrypt(inputBits, key);
-                System.out.println(result);
+                Boolean verbose = false;
+                
+                try {
+                    verbose = args[3].equals("-v");
+                } catch (Exception e) {}
+
+                String result = XorWrapper.decrypt(inputBits, key, verbose);
+                System.out.println("out:          " + result);
             }
             case "-h" -> { // help
                 System.out.println("Available commands:");
                 System.out.println("-h: help");
                 System.out.println("-e <text> <key>: encrypt");
                 System.out.println("-d <encrypted text> <key>: decrypt");
+                System.out.println("-v: verbose");
             }
         }
     }

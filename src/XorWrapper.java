@@ -1,28 +1,33 @@
 class XorWrapper {
-    public static String encrypt(String input, String key) { // text -> bits
+    public static String encrypt(String input, String key, Boolean verbose) { // text -> bits
         String inputBits = BinaryConverter.convertToBin(input);
         String keyBits = BinaryConverter.convertToBin(key);
 
         String repeatedKeyBits = keyRepeater(inputBits, keyBits);
         String result = XorUtil.xor(inputBits, repeatedKeyBits);
 
-        /*System.out.println("in: " + inputBits);
-        System.out.println("key: " + repeatedKey);
-        System.out.println("out: " + result);*/
+        if (verbose) {
+            System.out.println("in:           " + inputBits);
+            System.out.println("normal key:   " + keyBits);
+            System.out.println("repeated key: " + repeatedKeyBits);
+        }
 
         return result;
     }
 
-    public static String decrypt(String inputBits, String key) { // bits -> text
+    public static String decrypt(String inputBits, String key, Boolean verbose) { // bits -> text
         String keyBits = BinaryConverter.convertToBin(key);
         String repeatedKeyBits = keyRepeater(inputBits, keyBits);
 
         String resultBits = XorUtil.xor(inputBits, repeatedKeyBits);
         String result = BinaryConverter.convertToText(resultBits);
 
-        /*System.out.println("in: " + inputBits);
-        System.out.println("key: " + keyBits);
-        System.out.println("out: " + result);*/
+        if (verbose) {
+            System.out.println("in:           " + inputBits);
+            System.out.println("normal key:   " + keyBits);
+            System.out.println("repeated key: " + repeatedKeyBits);
+            System.out.println("result bits:  " + resultBits);
+        }
 
         return result;
     }
@@ -33,7 +38,6 @@ class XorWrapper {
         int inputLength = inputBits.length();
         int keyLength = keyBits.length();
 
-        //System.out.println("inputLength: " + inputLength + ", keyLength: " + keyLength);
         int keyRepeat = inputLength / keyLength; // number of full key repeats
         int keyPart = inputLength % keyLength; // number of chars
         
