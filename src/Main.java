@@ -20,7 +20,7 @@ public class Main {
                 String inputBits = BinaryConverter.convertToBin(input);
                 String keyBits = BinaryConverter.convertToBin(key);
 
-                String result = XorUtil.applyXor(inputBits, keyBits, verbose);
+                String result = XorUtil.xor(inputBits, keyBits, verbose);
 
                 System.out.println("out:          " + result);
             }
@@ -36,7 +36,7 @@ public class Main {
                 Boolean verbose = args.length > 3 && args[3].equals("-v");
 
                 String keyBits = BinaryConverter.convertToBin(key);
-                String result = XorUtil.applyXor(inputBits, keyBits, verbose);
+                String result = XorUtil.xor(inputBits, keyBits, verbose);
                 String resultText = BinaryConverter.convertToText(result);
 
                 System.out.println("out:          " + resultText);

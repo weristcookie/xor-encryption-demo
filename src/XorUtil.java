@@ -1,7 +1,18 @@
 class XorUtil {
-    public static String applyXor(String inputBits, String keyBits, Boolean verbose) { // bits -> bits
+    public static String xor(String inputBits, String keyBits, Boolean verbose) { // bits -> bits
         String repeatedKeyBits = keyRepeater(inputBits, keyBits);
-        String resultBits = xor(inputBits, repeatedKeyBits);
+
+        StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < inputBits.length(); i++) {
+            if (inputBits.charAt(i) == repeatedKeyBits.charAt(i)) {
+                sb.append("0");
+            } else {
+                sb.append("1");
+            }
+        }
+
+        String resultBits = sb.toString();
 
         if (verbose) {
             System.out.println("in:           " + inputBits);
@@ -29,20 +40,6 @@ class XorUtil {
 
         for (int i = 0; i < keyPart; i++) {
             sb.append(keyBits.charAt(i));
-        }
-
-        return sb.toString();
-    }
-
-    private static String xor(String inputBits, String keyBits) {
-        StringBuilder sb = new StringBuilder();
-        
-        for (int i = 0; i < inputBits.length(); i++) {
-            if (inputBits.charAt(i) == keyBits.charAt(i)) {
-                sb.append("0");
-            } else {
-                sb.append("1");
-            }
         }
 
         return sb.toString();
