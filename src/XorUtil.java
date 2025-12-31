@@ -4,7 +4,7 @@ class XorUtil {
 
         StringBuilder sb = new StringBuilder();
         
-        for (int i = 0; i < inputBits.length(); i++) {
+        for (int i = 0; i < inputBits.length(); i++) { // xor logic
             if (inputBits.charAt(i) == repeatedKeyBits.charAt(i)) {
                 sb.append("0");
             } else {
@@ -32,14 +32,14 @@ class XorUtil {
         int keyLength = keyBits.length();
 
         int keyRepeat = inputLength / keyLength; // number of full key repeats
-        int keyPart = inputLength % keyLength; // number of chars
+        int keyPart = inputLength % keyLength; // remaining part of key
 
         for (int i = 0; i < keyRepeat; i++) {
-            sb.append(keyBits);
+            sb.append(keyBits); // append full key repeats
         }
 
         for (int i = 0; i < keyPart; i++) {
-            sb.append(keyBits.charAt(i));
+            sb.append(keyBits.charAt(i)); // append remaining key chars
         }
 
         return sb.toString();
