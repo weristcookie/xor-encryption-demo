@@ -1,14 +1,14 @@
 public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
-            System.out.println("Invalid usage!");
+            System.out.println("Invalid usage! Use -h for help!");
             return;
         }
 
         switch (args[0]) {
             case "-e" -> { // encrypt
                 if (args.length < 3) {
-                    System.out.println("Invalid usage!");
+                    System.out.println("Invalid usage! Use -h for help!");
                     return;
                 }
 
@@ -26,7 +26,7 @@ public class Main {
             }
             case "-d" -> { // decrypt
                 if (args.length < 3) {
-                    System.out.println("Invalid usage!");
+                    System.out.println("Invalid usage! Use -h for help!");
                     return;
                 }
 
@@ -47,6 +47,9 @@ public class Main {
                 System.out.println("-e <text> <key>: encrypt");
                 System.out.println("-d <encrypted text> <key>: decrypt");
                 System.out.println("-v: verbose");
+            }
+            default -> {
+                System.out.println("Invalid usage! Use -h for help!");
             }
         }
     }
