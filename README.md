@@ -35,4 +35,5 @@ java Main -e "hello" "key"
 java Main -d <binary_output> "key"
 
 # Verbose mode
-java Main -e "hello" "key" -v```
+java Main -e "hello" "key" -v
+```
